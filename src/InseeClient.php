@@ -58,7 +58,9 @@ class InseeClient
     }
 
     /**
-     * Request access token from Insee
+     * Get company informations from SIREN number
+     *
+     * @param string $siren The siren number. Whitespaces are removed prior sending the request to INSEE
      */
     public function access_token()
     {
@@ -95,6 +97,11 @@ class InseeClient
         return json_decode($result->getBody());
     }
 
+    /**
+     * Get company informations from SIRET number
+     *
+     * @param string $siret The siret number. Whitespaces are removed prior sending the request to INSEE
+     */
     public function siret($siret)
     {
         // Format number
