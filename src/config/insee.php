@@ -15,5 +15,6 @@ return [
 
     'consumer_key'    => env('INSEE_CONSUMER_KEY'),
     'consumer_secret' => env('INSEE_CONSUMER_SECRET'),
+    'store_token' => env('INSEE_STORE_TOKEN'),
 
 ];
