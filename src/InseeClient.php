@@ -90,7 +90,9 @@ class InseeClient
 
         $this->requiresAuth();
 
-        return $this->get(self::ENDPOINT_SIRENE_V3 . '/siren/' . $siren);
+        $result = $this->get(self::ENDPOINT_SIRENE_V3 . '/siren/' . $siren);
+
+        return json_decode($result->getBody());
     }
 
     public function siret($siret)
@@ -100,7 +102,9 @@ class InseeClient
 
         $this->requiresAuth();
 
-        return $this->get(self::ENDPOINT_SIRENE_V3 . '/siret/' . $siret);
+        $result = $this->get(self::ENDPOINT_SIRENE_V3 . '/siret/' . $siret);
+
+        return json_decode($result->getBody());
     }
 
     private function requiresAuth()
