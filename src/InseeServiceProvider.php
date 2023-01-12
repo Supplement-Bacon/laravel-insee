@@ -13,9 +13,14 @@ class InseeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/config/insee.php' => config_path('insee.php'),
-        ]);
+        $configPath = __DIR__ . '/config/shotgun_scan.php';
+
+        $this->publishes([$configPath => config_path('insee.php')], 'config');
+        $this->mergeConfigFrom($configPath, 'insee');
+
+        if ($this->app instanceof Laravel\Lumen\Application) {
+            $this->app->configure('insee');
+        }
     }
 
     /**
@@ -25,8 +30,20 @@ class InseeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('laravel-insee', function () {
-            return new Insee();
+        $this->app->singleton('laravel-insee', function ($app) {
+            $config = isset($app['config']['services']['insee']) ? $app['config']['services']['insee'] : null;
+            if (is_null($config)) {
+                $config = $app['config']['insee'] ?: $app['config']['insee::config'];
+            }
+
+            return new InseeClient($config['guzzle_client_timeout']);
         });
+
+        $this->app->alias('laravel-insee', InseeClient::class);
+    }
+
+    public function provides()
+    {
+        return ['laravel-insee'];
     }
 }
