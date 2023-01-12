@@ -13,7 +13,7 @@ class InseeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__ . '/config/shotgun_scan.php';
+        $configPath = __DIR__ . '/config/insee.php';
 
         $this->publishes([$configPath => config_path('insee.php')], 'config');
         $this->mergeConfigFrom($configPath, 'insee');
