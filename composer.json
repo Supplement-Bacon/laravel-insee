@@ -2,8 +2,8 @@
     "name": "nspehler/laravel-insee",
     "type": "library",
     "description": "Lookup SIREN and SIRET numbers from Laravel",
-    "version": "1.1.0",
-    "time": "2019-01-23",
+    "version": "2.2.0",
+    "time": "2023-01-12",
     "keywords": [
         "laravel",
         "insee",
@@ -17,6 +17,11 @@
             "name": "Nicolas Spehler",
             "email": "Nicolas@Spehler.com",
             "homepage": "https://nspehler.com"
+        },
+        {
+            "name": "Samuel Hassid",
+            "email": "samuel@supplement-bacon.com",
+            "homepage": "https://supplement-bacon.com"
         }
     ],
     "require": {
