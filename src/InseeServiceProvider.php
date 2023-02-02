@@ -2,7 +2,10 @@
 
 namespace NSpehler\LaravelInsee;
 
+use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
+use NSpehler\LaravelInsee\Commands\Sevenrooms\IssueInseeAccessToken;
+use NSpehler\LaravelInsee\Commands\Sevenrooms\PruneInseeAccessToken;
 
 class InseeServiceProvider extends ServiceProvider
 {
@@ -13,14 +16,27 @@ class InseeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__ . '/config/insee.php';
+        $configPath = __DIR__ . '/../config/insee.php';
 
-        $this->publishes([$configPath => config_path('insee.php')], 'config');
+        $this->publishes([$configPath => config_path('insee.php')], 'insee-config');
         $this->mergeConfigFrom($configPath, 'insee');
 
         if ($this->app instanceof Laravel\Lumen\Application) {
             $this->app->configure('insee');
         }
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        AboutCommand::add('Insee', fn() => ['Version' => '2.0.0']);
+
+        if (!$this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->commands([
+            IssueInseeAccessToken::class,
+            PruneInseeAccessToken::class,
+        ]);
     }
 
     /**
