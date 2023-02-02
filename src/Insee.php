@@ -1,6 +1,6 @@
 <?php
 
-namespace NSpehler\LaravelInsee\Facades;
+namespace NSpehler\LaravelInsee;
 
 use Illuminate\Support\Facades\Facade;
 
