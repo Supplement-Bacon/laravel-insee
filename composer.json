@@ -1,27 +1,27 @@
 {
-    "name": "nspehler/laravel-insee",
+    "name": "supplement-bacon/laravel-insee",
     "type": "library",
     "description": "Lookup SIREN and SIRET numbers from Laravel",
-    "version": "2.2.0",
-    "time": "2023-01-12",
+    "version": "2.0.0",
+    "time": "2023-02-02",
     "keywords": [
         "laravel",
         "insee",
         "siren",
         "siret"
     ],
-    "homepage": "https://github.com/NSpehler/laravel-insee",
+    "homepage": "https://github.com/supplement-bacon/laravel-insee",
     "license": "MIT",
     "authors": [
-        {
-            "name": "Nicolas Spehler",
-            "email": "Nicolas@Spehler.com",
-            "homepage": "https://nspehler.com"
-        },
         {
             "name": "Samuel Hassid",
             "email": "samuel@supplement-bacon.com",
             "homepage": "https://supplement-bacon.com"
+        },
+        {
+            "name": "Nicolas Spehler",
+            "email": "Nicolas@Spehler.com",
+            "homepage": "https://nspehler.com"
         }
     ],
     "require": {
