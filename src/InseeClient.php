@@ -2,6 +2,7 @@
 
 namespace NSpehler\LaravelInsee;
 
+use App\Sevenrooms\Models\AuthorizationToken;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -94,7 +95,7 @@ class InseeClient
     /**
      * Request access token from Insee
      */
-    private function access_token()
+    public function access_token(bool $store = false)
     {
         // Base64 encode consumer key and secret
         $token = base64_encode(config('insee.consumer_key') . ':' . config('insee.consumer_secret'));
@@ -110,9 +111,15 @@ class InseeClient
         ];
 
         $result = $this->post(self::ENDPOINT_TOKEN);
-        // dd($result);
 
         $result = json_decode($result->getBody());
+
+        if ($store) {
+            AuthorizationToken::create([
+                'token' => $result->access_token,
+                'expires_at' => now()->addSeconds($result->expires_in),
+            ]);
+        }
 
         return $result->access_token;
     }
@@ -121,7 +128,11 @@ class InseeClient
     {
 
         if (config('insee.store_token')) {
-            // TODO: Fetch token from DB
+            if (!$token = AuthorizationToken::latest()->get()) {
+                $token = $this->access_token(store:true);
+            }
+            $this->headers['headers']['Authorization'] = 'Bearer ' . $token->token;
+            return;
         }
 
         // Generate a new token
