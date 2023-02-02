@@ -1,6 +1,6 @@
 <?php
 
-namespace NSpehler\LaravelInsee\Commands\Sevenrooms;
+namespace NSpehler\LaravelInsee\Console\Commands;
 
 use Illuminate\Console\Command;
 use NSpehler\LaravelInsee\Insee;

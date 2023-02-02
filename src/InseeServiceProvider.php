@@ -4,8 +4,8 @@ namespace NSpehler\LaravelInsee;
 
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
-use NSpehler\LaravelInsee\Commands\Sevenrooms\IssueInseeAccessToken;
-use NSpehler\LaravelInsee\Commands\Sevenrooms\PruneInseeAccessToken;
+use NSpehler\LaravelInsee\Console\Commands\IssueInseeAccessToken;
+use NSpehler\LaravelInsee\Console\Commands\PruneInseeAccessToken;
 
 class InseeServiceProvider extends ServiceProvider
 {

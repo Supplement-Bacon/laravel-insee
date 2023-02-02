@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Sevenrooms\Models;
+namespace NSpehler\LaravelInsee\Models;
 
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Casts\Attribute;
