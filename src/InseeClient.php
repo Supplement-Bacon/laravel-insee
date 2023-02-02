@@ -65,10 +65,10 @@ class InseeClient
      */
     public function siren($siren)
     {
+        $this->requiresAuth();
+
         // Format number
         $siren = str_replace(' ', '', $siren);
-
-        $this->requiresAuth();
 
         $result = $this->get(self::ENDPOINT_SIRENE_V3 . '/siren/' . $siren);
 
@@ -82,10 +82,10 @@ class InseeClient
      */
     public function siret($siret)
     {
+        $this->requiresAuth();
+
         // Format number
         $siret = str_replace(' ', '', $siret);
-
-        $this->requiresAuth();
 
         $result = $this->get(self::ENDPOINT_SIRENE_V3 . '/siret/' . $siret);
 
