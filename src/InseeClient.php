@@ -126,17 +126,18 @@ class InseeClient
 
     private function requiresAuth()
     {
-
-        if (config('insee.store_token')) {
-            if (!$token = AuthorizationToken::latest()->get()) {
-                $token = $this->access_token(store:true);
-            }
-            $this->headers['headers']['Authorization'] = 'Bearer ' . $token->token;
+        if (!config('insee.store_token')) {
+            // Generate a new token
+            $this->headers['headers']['Authorization'] = 'Bearer ' . $this->access_token();
             return;
         }
 
-        // Generate a new token
-        $this->headers['headers']['Authorization'] = 'Bearer ' . $this->access_token();
+        if (!$token = AuthorizationToken::latest()->first()) {
+            $token = $this->access_token(store:true);
+            $this->headers['headers']['Authorization'] = 'Bearer ' . $token;
+        }
+
+        $this->headers['headers']['Authorization'] = 'Bearer ' . $token->token;
     }
 
     /**
