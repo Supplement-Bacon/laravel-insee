@@ -2,8 +2,8 @@
 
 namespace NSpehler\LaravelInsee\Console\Commands;
 
-use App\Sevenrooms\Models\AuthorizationToken;
 use Illuminate\Console\Command;
+use NSpehler\LaravelInsee\Models\AuthorizationToken;
 
 class PruneInseeAccessToken extends Command
 {
