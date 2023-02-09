@@ -132,9 +132,10 @@ class InseeClient
             return;
         }
 
-        if (!$token = AuthorizationToken::latest()->first()) {
+        if (!$token = AuthorizationToken::notExpired()->latest()->first()) {
             $token = $this->access_token(store:true);
             $this->headers['headers']['Authorization'] = 'Bearer ' . $token;
+            return;
         }
 
         $this->headers['headers']['Authorization'] = 'Bearer ' . $token->token;
