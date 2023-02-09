@@ -48,4 +48,15 @@ class AuthorizationToken extends Model
         );
     }
 
+    /**
+     * Scope a query to only include not expired tokens.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNotExpired($query)
+    {
+        return $query->where('expires_at', '<=', now());
+    }
+
 }
