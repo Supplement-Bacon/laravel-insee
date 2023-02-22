@@ -56,7 +56,7 @@ class AuthorizationToken extends Model
      */
     public function scopeNotExpired($query)
     {
-        return $query->where('expires_at', '<=', now());
+        return $query->where('expires_at', '>', now());
     }
 
 }
